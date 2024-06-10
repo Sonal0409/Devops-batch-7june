@@ -1,0 +1,211 @@
+Steps to connect to the lab:
+============================================
+
+Go to DevOps Certification Training and click onlabs
+On the left side --> select practice labs
+Select the tab DevOps in AWS 
+Click on launch lab --> again click on launch lab
+Click on RDP ACCESS
+Click on start Instance
+Once is the lab has started .. click on RDP access and click on blue button which is there for Auth Url
+Lab will start in the new tab.
+Click on Terminal button at the bottom(black square) in the lab desktop
+
+
+Demo Steps:
+================================================
+
+1. Become root user:
+
+# sudo su -
+
+3. Create a Local repository using GIT
+
+#  mkdir myproject
+
+# cd myproject
+
+# touch index1.html index2.html
+
+# ls
+
+# git init
+
+A local repository will be created
+
+# ls -al
+
+.git folder will be available, which is your local repository.
+
+
+4. Add the configuration parameters in git, which will later update author and email details in the git commit history
+
+2 variables need to be set
+
+user.name
+user.email
+
+
+# git config --global user.name sonal0409
+
+# git config --global user.email admin@gmail.com
+
+List the configurations:
+
+git config --list
+
+try it latter
+==========================
+git config --global --unset user.name
+
+git config --global --unset user.email
+
+
+
+5. Add the files to the stagging area and commit them to Local repo
+=========================================
+
+# git status
+
+# git add <filename> <filename2>
+
+or
+
+git add --all
+
+or
+
+git add .
+
+or
+
+git add *.java *.php
+
+# git status
+
+# git commit -m "adding file index1.html"
+
+Commit all the changes/files in the stagging area
+
+If we want to Choose a file to be commited
+
+git commit -m "adding file index1.html" <filename>
+
+================================================
+
+Modify exisitng files and add those changes to local repo
+====================================================
+
+Take a file which is in local repo
+
+# git ls-files
+
+# vim index1.html
+
+add any data & save the file
+
+# git status
+
+status of file is modified
+
+To add all the modification and commit them to local repo
+
+# git commit -a -m "added modifications"
+
+=================================================
+1. Check the log for commit history
+
+# git log
+
+in this HEAD it is an object in git which represents the latest/recent commit id
+
+# git log --oneline
+
+Check commit history of every commit in a single line
+
+# git show <commid id>
+Shows what happened in that commit.
+
+See commits of a particular file:
+
+ git log --graph --all -- index1.html
+
+==============================================================
+
+Delete a file form LR and WD
+===================================================================
+# git rm index1.html
+
+==> this command deletes file from WD and LR
+As we have deleted somethign on LR/made chnage on LR , we need to track that. So commit the deletion
+
+# git commit -m "deleted file"
+
+# git ls-files
+# ls
+File will not be in localrepo and WD
+
+========================================================
+
+Revert command in GIT
+=========================================================
+> This command is applicable only to commit id
+> using this command we cna revert the chnages of the commit to its previous state
+> but when a revert command is executed, it is chnage something on the LR, so there needs to be a commit again
+> When revert command is executed, immediatly a nano editor where user will eneter a message why we are reverting
+> save the file. Revert will be complete and a new commit id will be generated
+
+# git revert <deletioncommitid>
+
+=========================================================
+
+Create a feature branch in git  and switch to the branch
+
+========================================
+
+# git branch
+
+Create a new branch
+
+# git branch feature1
+
+Switch to the new branch
+
+# git checkout feature1
+
+[OR]
+
+Create a new branch and switch to the branch also
+
+# git checkout -b feature2
+
+3. Merge the commits/files of new branch to master
+
+Before merging always switch to the destination branch
+
+# git checkout master
+
+# git merge feature1 master
+
+< git merge sourcebranch destinationbranch>
+
+
+Check which branches are merged to master
+
+git branch -a --merged master
+
+Check which branches are not merged to master
+
+git branch -a --no-merged master
+
+
+4. Delete a branch which is not merged with master branch
+
+# git branch -D <branchname>
+
+Delete a branch whose commits have been merged with the master branch
+
+# git branch -d feature1
+
+
+=================================================
