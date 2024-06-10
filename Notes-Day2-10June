@@ -159,6 +159,132 @@ Revert command in GIT
 
 =========================================================
 
+
+GIT REST
+===============================================
+
+Git reset operation:
+===============================
+Demo:
+
+Create a new file --> commit on it
+
+# touch resetdemo
+# git add .
+# git commit -m "added a new file resetdemo"
+
+Make some small modification on the file --> commit on it
+Make some small modification on the file --> commit on it
+Make some small modification on the file --> commit on it
+Make some small modification on the file --> commit on it
+Make some small modification on the file --> commit on it
+
+Which mean I will have a very length git commit history
+
+Every small change I have committed it
+
+We always want a clean and crisp commit history
+
+Git says, you can RESET your commit history
+
+   that means:
+     > we can Change the HEAD of the log
+     > we can delete commit ids
+     > we can move the changes from LR to Staging area
+     > we can move the changes from LR to Working area
+     > we can also permanently delete commits and changes in LR and working directory
+
+the command is : git reset <commit id>
+
+What is it that we have to reset, > we want to reset the HEAD to the given <commit id>
+
+#  git reset d573778
+
+So what about the commits before the given the <commit id> --> they will get deleted
+
+So what about the changes we did as part of those commits?
+
+There 3 options that can be given with git reset command
+
+
+--soft:
+
+    Observation: 
+     > In the git log, the commit history is reset -> all the commits which are above the given <commitID> get deleted
+     > Now the HEAD is the  <Commitid> given in the command
+     > All the changes of the deleted commits will be back to staging area.
+
+
+--mixed
+
+Observation: 
+ > In the git log, the commit history is reset -> all the commits which are above the given <commitID> get deleted
+ > Now the HEAD is the  <Commitid> given in the command
+ > All the changes of the deleted commits will be back to working directory
+
+--hard
+=============================
+Observation: 
+ > In the git log, the commit history is reset -> all the commits which are above the given <commitID> get deleted
+ > Now the HEAD is the  <Commitid> given in the command
+ > All the changes of the deleted commits will also be permanently deleted
+
+
+
+# git log --oneline
+
+Select the commit id which is at the bottom of your log.
+
+
+
+# git reset --hard <commit id>
+
+Example : git reset --hard 04f432e
+
+
+
+
+
+When you execute 
+
+# git status
+
+If you have Untracked files, modified files.
+
+# git add .
+
+# git commit -m "done"
+
+
+
+
+Assignment:
+======================
+
+# git log --oneline
+
+# git reset --soft <commit id>
+
+# git status
+
+# git commit -m “added all changes”
+
+=====================
+
+
+# git log --oneline
+
+# git reset --mixed <commit id>
+
+# git status
+
+# git add .
+
+# git commit -m “added all changes”
+
+=================================================
+
+
 Create a feature branch in git  and switch to the branch
 
 ========================================
