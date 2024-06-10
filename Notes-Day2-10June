@@ -209,3 +209,112 @@ Delete a branch whose commits have been merged with the master branch
 
 
 =================================================
+
+Working on Remote repository:
+================================
+
+
+Create a Personal Access token on github
+It is a authentication method which very secure
+This is used whenever we have to push files or changes from Local to remote repo
+There is no concept of using password, instead we have to use Personal access token in git locally
+
+Demo:
+
+In the main menu Go to settings of github → on the left side →scroll down to developer settings → go to Personal Access tokens →Click on tokens (classic)---> Generate New token→ select token classic
+Note→ give a name to the token
+Expiration -> 30 days
+Select scope : repo (1 checkbox) 
+Click on generate token
+
+Make sure to copy your personal access token now. You won’t be able to see it again! 
+
+
+
+> click on New button to create a remote repo
+> Name to the repository
+> select public repo
+> click on Create repository
+
+
+
+
+
+
+
+
+
+Demo 3: Connect Local repo to remote repo
+
+Go to git and execute this command
+
+  $ git remote add origin <your remote repo Path>
+
+Example like this:
+…
+ git remote add origin https://github.com/Sonal0409/myproject06nov.git
+…
+
+Execute the command to check local and remote repo is set:
+
+  $ git remote -v
+
+
+
+Assignment
+
+To remove local repo and remote repo connection:
+
+$ git remote rm origin
+
+Command that can be used to update existing remote origin:
+
+$ git remote set-url origin <url>
+
+
+=======================================
+
+PUSH the master branch to remote repo
+===========================
+
+On the remote repo we have no code, no files no commits and no branches
+
+
+# git checkout master
+
+# git push origin master
+
+Here origin means variable storing path of remote repo 
+
+
+It will now ask to enter username
+
+Username for 'https://github.com':
+
+Here enter the token and press enter key
+
+Again it will ask for password
+
+Here enter the token and press enter key
+
+JUST PRESS ENTER KEY
+
+It will send the files and commits to remote.
+==========================
+
+Pulling file from remote github repo  to local repo
+****************************************
+
+In your git hub repo , add some new files:
+
+And commit them in github
+
+Pull those files to your local
+…
+ git pull origin master
+…
+
+
+Pull the files from remote and merge with local repo and working directory
+
+
