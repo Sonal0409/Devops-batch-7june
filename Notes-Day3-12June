@@ -1,3 +1,14 @@
+Connect to the lab
+
+Open the terminal on the lab.
+
+become aroot user on lab
+
+# sudo su -
+
+# cd myproject
+
+
 Create a feature branch in git  and switch to the branch
 
 ========================================
