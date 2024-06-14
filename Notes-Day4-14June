@@ -60,7 +60,7 @@ Job Package Job
 Go to jenkins--> new item--> Name= Package==> freestyle project
 ==> source codemanagement==>select git==> give git repo name https://github.com/Sonal0409/DevOpsCodeDemo.git
  
-build ==> invoke top level maven target==>mymaven
+Click on build steps==>  select  in the drop down --> invoke top level maven target==>mymaven
 
  goal = clean install package
 
