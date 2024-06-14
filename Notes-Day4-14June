@@ -1,5 +1,20 @@
 Jenkins Demo:
 
+Connect to the Devops Updated Lab
+
+Open the browser on the lab
+
+in the URL give : http://localhost:8080
+
+The crednetials to log into Jenkins are:
+
+username: admin
+password: admin
+
+
+
+
+
 1. Create a Freestyle job in jenkins
 
 2. Create a freestyle job and integrate it with GITHUB repostitory
