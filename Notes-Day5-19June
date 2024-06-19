@@ -1,0 +1,270 @@
+Check Ansible Installation:
+*****************************
+$ ansible --version
+
+Ad Hoc Commands in Ansible
+==========================
+
+ These are ansible direct commands.
+When we have a single module to be executed on host servers, we use adhoc commands
+Whenever we want to quickly check a result or a file or a change on the host servers, we can use adhoc command.
+When we have multiple modules to be executed, we cannot use adhoc command
+It is just a single command which cannot be reused.
+
+Syntax:
+
+# ansible host -m modulename -a “argument”
+
+
+Ping module: trivial module, used with adhoc commands
+==========
+Check ⇒ if ansible is able connect with host and it will check python configuration on all hosts
+
+# ansible localhost -m ping
+
+Command module:
+# ansible localhost -m command -a  "uptime"
+
+# ansible localhost -m command -a “df -h”
+
+
+Introduction to YAML:
+===========================
+
+Ansible playbook are written in YAML
+
+YAML is not a programming language, scripting language
+
+It is a fileformat used to save data like json or XML
+
+YAML files save data in form of key and value
+
+It is declarative in nature
+
+The extension of YAML file is .yml or .YAML
+
+YAML syntax
+
+key: value
+
+key: name of the key is given by the tool
+value: will be given by the user
+
+Write YAML synatx which store single value:
+=======================================
+
+---
+company: Simplilearn
+trainer: Sonal Mittal
+Training: DevOps
+Day: weekend
+Time: 7AM
+verison: 2.0
+...
+
+Write YAML synatx where key will store multiple value:
+=======================================
+
+company: Simplilearn
+Trainer:
+  - Sonal
+  - Ravi
+  - Nilesh
+  - Jack
+Training:
+  - DevOps
+  - AWS
+  - Azure
+Time: 
+ - weekend
+ - weekday
+
+
+Write YAML synatx where key will store object(set of key & value):
+=======================================
+
+company: Simplilearn
+Trainer:
+  - name: Sonal
+    phone: 2353464645
+    email: admin@gmail.com
+  - name: ravi
+    phone: 23535345
+    email: ravi@gmail.com
+    
+Training:
+  - DevOps
+  - AWS
+  - Azure
+Time: 
+ - weekend
+ - weekday
+
+==============================================
+
+Playbook to deploy an HTML code on Apache webserver
+=========================================
+
+# sudo su -
+
+# cd /etc/ansible
+
+First create a index.html file in the directory /etc/ansible
+
+$ vim index.html
+ Write any text and save the file
+
+<h1> this file is from ansible </h1>
+<h1> created by </h1>
+
+Save the file
+
+Continue the scenario and create a playbook:
+===========================
+$ pwd   ⇒ /etc/ansible
+
+vim playbook1.yml
+
+The complete playbook is:
+
+- hosts: localhost
+  become: true
+  tasks:
+  - name: update repo
+    command: apt update -y
+  - name: Install a package apache2
+    apt: name=apache2 state=present
+  - name: Start apache2 service
+    service: name=apache2 state=started
+  - name: Deploy index.html file
+    copy: src=index.html dest=/var/www/html
+  - name: restart apache2 server
+    service: name=apache2 state=restarted
+
+
+Execute the playbook
+
+# ansible-playbook playbook1.yml
+
+Go to browser of lab and give
+
+localhost:80
+
+==================================
+
+
+===========================================================
+Terraform:
+========================================================
+
+Setup Terraform:
+
+Execute below command to install terraform:
+
+
+Verify:
+$ terraform --version
+
+
+
+=========================================================
+
+User creation in AWS and create accesskey and secret key for it.
+
+We will use this accesskey and secret key in the terraform configuration file.
+
+
+You will be connected to AWS management:
+
+In the search box, give IAM and select it.
+You will be on IAM dashboard
+
+On the left side→ click on Users→ Click on ADD user button →unser user details give User name as Terraform → click on next →select 3rd option Attach policies directly →scroll down and from list click on AdministratorAccess →Scroll down → click next → scroll down and click on Create User.
+
+Click on the user name Terraform →Click on security credentials tab→ scroll down to access key→ click on create access key→Click on Command Line Interface (CLI) → Scroll down→Select the box of→ I understand the above recommendation and want to proceed to create an access key. → click on next → click on create access key
+
+Copy the access key : 
+Coppy and secret key: 
+
+=========================================================
+
+
+
+Demo 1:
+===============================
+             Connect and authenticate terraform with the AWS provider.
+===============================
+Terraform code is always written in block format
+The first block that you will see in main terraform file is provider block
+
+This block consist of following information:
+
+> name of the provider
+> region where we want to create infrastructure
+> access key and secret key to connect AWS securely
+
+For this create a directory on the lab:
+
+# mkdir myterraformfiles
+# cd myterraformfiles
+# vim awsinstance.tf
+
+provider "aws" {
+
+  region     = "us-east-1"
+
+  access_key = "sgfdfgdgdg"
+
+  secret_key = "54354rdfdgdfgdgfdff"
+
+}
+
+
+Note: replace access key and secret key with your values.
+
+Save the file and execute below command:
+
+# terraform init
+
+Registry link : https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+
+Demo2:
+==========================================================
+Create an ec2 instance in AWS using terraform:
+The full code of terraform with provider and resource:
+================================================
+
+provider "aws" {
+
+  region     = "us-east-1"
+
+  access_key = "AKIAUJU24ZR3XTD4A6PC"
+
+  secret_key = "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"
+
+}
+
+resource "aws_instance" "myec2" {
+
+  ami           = "ami-03c7d01cf4dedc891"
+
+  instance_type = "t2.micro"
+
+  tags = {
+
+    Name = "terrafrom-instance"
+
+  }
+
+}
+
+Execute below commands
+
+# terraform validate
+
+# terraform plan
+
+# terraform apply
+
+# terraform destroy
