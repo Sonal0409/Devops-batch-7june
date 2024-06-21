@@ -1,3 +1,136 @@
+===========================================================
+Terraform:
+========================================================
+
+Setup Terraform:
+
+Execute below command to install terraform:
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+
+
+OR
+
+wget https://releases.hashicorp.com/terraform/1.8.5/terraform_1.8.5_linux_amd64.zip
+unzip terraform_1.8.5_linux_amd64.zip
+mv terraform /usr/local/bin
+execute these commands on the lab terminal
+close the terminal
+and open again
+terraform --version
+
+
+Verify:
+$ terraform --version
+
+
+
+=========================================================
+
+User creation in AWS and create accesskey and secret key for it.
+
+We will use this accesskey and secret key in the terraform configuration file.
+
+
+You will be connected to AWS management:
+
+In the search box, give IAM and select it.
+You will be on IAM dashboard
+
+On the left side→ click on Users→ Click on ADD user button →unser user details give User name as Terraform → click on next →select 3rd option Attach policies directly →scroll down and from list click on AdministratorAccess →Scroll down → click next → scroll down and click on Create User.
+
+Click on the user name Terraform →Click on security credentials tab→ scroll down to access key→ click on create access key→Click on Command Line Interface (CLI) → Scroll down→Select the box of→ I understand the above recommendation and want to proceed to create an access key. → click on next → click on create access key
+
+Copy the access key : 
+Coppy and secret key: 
+
+=========================================================
+
+
+
+Demo 1:
+===============================
+             Connect and authenticate terraform with the AWS provider.
+===============================
+Terraform code is always written in block format
+The first block that you will see in main terraform file is provider block
+
+This block consist of following information:
+
+> name of the provider
+> region where we want to create infrastructure
+> access key and secret key to connect AWS securely
+
+For this create a directory on the lab:
+
+# mkdir myterraformfiles
+# cd myterraformfiles
+# vim awsinstance.tf
+
+provider "aws" {
+
+  region     = "us-east-1"
+
+  access_key = "sgfdfgdgdg"
+
+  secret_key = "54354rdfdgdfgdgfdff"
+
+}
+
+
+Note: replace access key and secret key with your values.
+
+Save the file and execute below command:
+
+# terraform init
+
+Registry link : https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+
+Demo2:
+==========================================================
+Create an ec2 instance in AWS using terraform:
+The full code of terraform with provider and resource:
+================================================
+
+provider "aws" {
+
+  region     = "us-east-1"
+
+  access_key = "AKIAUJU24ZR3XTD4A6PC"
+
+  secret_key = "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"
+
+}
+
+resource "aws_instance" "myec2" {
+
+  ami           = "ami-03c7d01cf4dedc891"
+
+  instance_type = "t2.micro"
+
+  tags = {
+
+    Name = "terrafrom-instance"
+
+  }
+
+}
+
+Execute below commands
+
+# terraform validate
+
+# terraform plan
+
+# terraform apply
+
+# terraform destroy
+
+
+
 Docker:
 ********************************************
 Lab already has docker installed
