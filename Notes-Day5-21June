@@ -97,14 +97,14 @@ Save the file and execute below command:
 
 # terraform plan
 
-# terraform apply
+# terraform apply --auto-approve
 
 It will ask for approval 
 
 Give:  yes
 
 
-# terraform destroy
+# terraform destroy --auto-approve
 
 
 
