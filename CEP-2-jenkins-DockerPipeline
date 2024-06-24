@@ -1,0 +1,99 @@
+BUILD DOCKERFILE AND CONTAINER USING JENKINS PIPELINE:
+======================================================
+
+Steps to execute DevOps Project -2
+======================================================
+
+
+RUN this command on terminal
+
+Before executing the pipleine give jenkins permsision to run docker commands
+#  chmod 777 /var/run/docker.sock
+
+
+Write down the Project 2 Problem statement.
+
+Write down about the Java project that we will build and Deploy
+
+Provide repo details + screenshot
+
+
+https://github.com/Sonal0409/MavenBuild-Docker-GitHubActions.git
+
+
+The repository consist of: 
+
+> source code
+> Test cases
+> dockerfile
+
+Give the screenshots of steps to create jenkins Job [Pipeline]
+
+In the pipeline add the steps to build, give screenshot of that
+
+Run the pipeline and add the screenshot of target folder with the build file init
+
+Continue writing the pipeline → add the stage in the pipeline for Build Image and run the image to launch a container
+
+Complete and build the pipeline
+
+pipeline{
+    
+    tools{
+        maven 'mymaven'
+    }
+    
+    agent any
+    
+    stages{
+        
+        stage('Clone the code')
+        {
+            steps{
+                git 'https://github.com/Sonal0409/MavenBuild-Docker-GitHubActions.git'
+            }
+        }
+        
+        stage('Build Code'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+        
+        stage('Build the dockerfile')
+        {
+            steps{
+                sh 'docker build -t myappimage .'
+            }
+            
+        }
+        
+        
+        stage('Deploy the Image')
+        {
+            steps{
+                sh 'docker run -d -P myappimage '
+            }
+        }
+        
+        
+        
+    }
+    
+    
+}
+
+
+Before executing the pipleine give jenkins permsision to run docker commands
+#  chmod 777 /var/run/docker.sock
+
+
+Go to Lab terminal and execute below command and give screenshot of it
+
+# docker images
+
+# docker ps -a
+
+
+
+
