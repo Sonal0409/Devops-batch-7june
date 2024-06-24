@@ -1,0 +1,157 @@
+ Launch a container from an Image and container should be up & running
+
+When we execute the run command we have to mention in which mode we want to launch the container
+
+Foreground mode
+
+$ docker run -it imagename
+
+-i : interactive
+-t: terminal
+
+$ docker run -it ubuntu
+
+Container will be launched
+Will be up & running
+User will be attached to the container
+That is , user will be on the container terminal
+
+Whenever you are attached to the terminal of the container, using the following options you will come out of the container:
+
+Ctl pq
+
+User will come out of the container and container will be still up and running
+
+exit
+
+User will come out of the container and container will be exited
+
+Attach to the terminal of the container again:
+
+$ docker attach containerid/containername
+
+Execute exit command to comout of container
+
+User will come out of the container and container will be exited
+
+To start a exited container:
+
+$ docker start containerid/name
+
+To stop a running container
+
+$ docker stop containerid/name
+
+Detached mode (-d)
+====================================================
+
+$ docker run -d nginx
+$ docker ps -a
+$ docker container ls  ==> this will list containers in running status
+
+Container will be launched
+Will be up & running
+User will be detached to the container ie: container is running in the background, user can continue working on the host machine
+
+Delete a Container from the host machine
+
+Synatx:  docker rm -f containername/conatinerid
+
+$ docker rm -f n1
+$ docker ps -a : no container will be there
+
+
+Describe all Details of the container created
+****************
+
+Inspect is the command that will describe all the details of the container in json format
+
+$ docker inspect containername/id
+
+Port mapping or port forwarding
+*****************
+By default docker container is ready to be accessed by the user, it is the user internet who cannot reach the container.
+Port mapping/port forwarding is  a concept in docker that allows a user to access the container from browser of his machine
+Port mapping has to be done at the run time of container
+If the container is already running/exited, you cannot do port forwarding
+In port forwarding we have to provide mapping between 2 ports
+Systemport - any free port on the lab machine
+Containerport : port on which container is exposed to. You can get this information from the Image, look for expose keyword on the image in docker hub
+
+
+Method 1: user defined custom port mapping : 
+
+ -p : this option will perform port mapping
+
+
+
+$ docker run –name n2 -d -p 8282:80 nginx
+$ docker port n2
+
+
+Method 2:  docker provided random port mapping : -P
+
+$ docker run -d –name web -P httpd
+$ docker port web
+
+In this case user will not provide any port information
+
+Docker will do random free port from host machine and map it to your container port
+
+Access the container OR execute a command on the container from the host machine
+=====================================================================
+Take a container name which is running and which has port mapping done
+
+$ docker exec -it containername command
+
+$ docker exec -it web bash
+
+
+Clean up docker host:
+************************
+Delete  all containers at once
+
+$ docker rm -f $(docker ps -aq)
+$ docker rm -f containername
+
+Delete all images:
+
+$ docker system prune –all
+
+Delete all images
+ Delete exited container
+============================================
+
+
+Dockerfile:
+========================================
+
+# mkdir mydockerfiles
+# cd mydockerfiles
+# vim dockerfile
+
+# this is my first dockerfile
+
+FROM ubuntu
+LABEL maintainer="Sonal"
+RUN apt-get update
+RUN apt-get install nginx -y
+RUN apt-get install git -y
+COPY index.html /var/www/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+Create the index.html file
+
+<h1> this file is from docker </h1>
+
+Save (:wq!)
+
+Build the dockerfile
+
+docker build -t myimage01 .
+
+
+RUN THE IMAGE
+
+ docker run -d --name web -P  myimage01
