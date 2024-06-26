@@ -6,3 +6,10 @@
 # echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # sudo apt-get update
 # sudo apt-get install -y containerd.io docker-ce
+
+
+Initiate kubernetes:
+===========================
+sed -i 's|disabled_plugin|#disabled_plugin|g' /etc/containerd/config.toml 
+service containerd restart
+kubeadm init --ignore-preflight-errors=all
