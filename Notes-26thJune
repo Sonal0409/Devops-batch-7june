@@ -13,3 +13,10 @@ Initiate kubernetes:
 sed -i 's|disabled_plugin|#disabled_plugin|g' /etc/containerd/config.toml 
 service containerd restart
 kubeadm init --ignore-preflight-errors=all
+
+
+Execute these 3 command:
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
