@@ -60,6 +60,23 @@ kubectl taint node  ip-172-31-39-238 node-role.kubernetes.io/control-plane:NoSch
 
 
 
+Create 1 POD from 1 image
+
+# kubectl run pod1 --image nginx
+
+# kubectl get pods
+
+Check details about the pod:
+
+# kubectl describe pod pod1
+
+
+
+
+
+
+
+
 
 
 
