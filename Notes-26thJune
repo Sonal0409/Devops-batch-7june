@@ -49,6 +49,20 @@ give y
 # kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
 
 
+Remove the taint so that we can create pods on the kubernetes machine
+
+
+# kubectl taint node  <node Name> node-role.kubernetes.io/control-plane:NoSchedule-
+
+Example:
+
+kubectl taint node  ip-172-31-39-238 node-role.kubernetes.io/control-plane:NoSchedule
+
+
+
+
+
+
 
 
 
