@@ -68,6 +68,16 @@ pipeline{
             
         }
         
+        stage('Push the image to Docker hub')
+        {
+            steps{
+              sh 'docker tag myappimage  sonal04devops/myappimage'
+              sh 'docker login --username sonal04devops --password sonal04devops'
+              sh 'docker push sonal04devops/myappimage'
+
+            }
+            
+        }
         
         stage('Deploy the Image')
         {
@@ -82,7 +92,6 @@ pipeline{
     
     
 }
-
 
 Before executing the pipleine give jenkins permsision to run docker commands
 #  chmod 777 /var/run/docker.sock
