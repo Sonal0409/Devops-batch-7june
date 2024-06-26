@@ -56,7 +56,7 @@ Remove the taint so that we can create pods on the kubernetes machine
 
 Example:
 
-kubectl taint node  ip-172-31-39-238 node-role.kubernetes.io/control-plane:NoSchedule
+kubectl taint node  ip-172-31-39-238 node-role.kubernetes.io/control-plane:NoSchedule-
 
 
 
