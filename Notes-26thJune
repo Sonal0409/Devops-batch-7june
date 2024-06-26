@@ -71,7 +71,17 @@ Check details about the pod:
 # kubectl describe pod pod1
 
 
+# kubectl create -f https://raw.githubusercontent.com/Sonal0409/Devops-batch-7june/main/Replica-Set.yml
 
+# kubectl get all
+
+Scale down
+
+# kubectl scale replicaset myreplica --replicas=1
+
+Scale uP
+
+# kubectl scale replicaset myreplica --replicas=5
 
 
 
