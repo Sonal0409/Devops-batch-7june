@@ -1,0 +1,17 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+ name: myreplica
+spec:
+ replicas: 3 # this will create 3 duplicate pods
+ selector:
+  matchLabels:
+   app: webserver
+ template:   # what shoudl on the pods
+  metadata:
+   labels:
+    app: webserver
+  spec:
+   containers:
+    - name: c1
+      image: nginx
