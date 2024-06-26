@@ -28,3 +28,27 @@ Start the kubernetes server by installing the network runtime interface
 wait for few seconds and execute the below command
 
 # kubectl get nodes
+
+
+in case you get an error then execute below command:
+=================
+
+# kubeadm reset --force
+
+# kubeadm init --ignore-preflight-errors=all
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Do you want to overwrite 
+
+give y
+
+
+# kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
+
+
+
+
+
